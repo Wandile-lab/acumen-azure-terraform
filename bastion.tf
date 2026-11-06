@@ -12,11 +12,12 @@ resource "azurerm_network_interface" "bastion_nic" {
 }
 
 resource "azurerm_linux_virtual_machine" "bastion_vm" {
-  name                = "vm-acumen-bastion"
-  resource_group_name = azurerm_resource_group.acumen.name
-  location            = azurerm_resource_group.acumen.location
-  size                = "Standard_D2s_v4"
-  admin_username      = "acumenadmin"
+  vm_agent_platform_updates_enabled = true
+  name                              = "vm-acumen-bastion"
+  resource_group_name               = azurerm_resource_group.acumen.name
+  location                          = azurerm_resource_group.acumen.location
+  size                              = "Standard_D2s_v4"
+  admin_username                    = "acumenadmin"
 
   network_interface_ids = [
     azurerm_network_interface.bastion_nic.id,
